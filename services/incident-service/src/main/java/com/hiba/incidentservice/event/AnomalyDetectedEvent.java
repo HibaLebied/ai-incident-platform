@@ -1,17 +1,20 @@
-package com.hiba.logingestionservice.event;
+package com.hiba.incidentservice.event;
 
 import java.time.LocalDateTime;
 import java.time.Instant;
 import java.util.UUID;
 
-public record LogCreatedEvent(
+public record AnomalyDetectedEvent(
         Long logId,
         String serviceName,
-        String level,
-        String message,
-        LocalDateTime timestamp,
         String environment,
         String traceId,
+        LocalDateTime timestamp,
+        String anomalyType,
+        String description,
+        String fingerprint,
+        String category,
+        Integer severityScore,
         UUID eventId,
         String eventType,
         Integer schemaVersion,
@@ -19,28 +22,34 @@ public record LogCreatedEvent(
         String source,
         String correlationId
 ) {
-    public LogCreatedEvent(
+    public AnomalyDetectedEvent(
             Long logId,
             String serviceName,
-            String level,
-            String message,
-            LocalDateTime timestamp,
             String environment,
-            String traceId
+            String traceId,
+            LocalDateTime timestamp,
+            String anomalyType,
+            String description,
+            String fingerprint,
+            String category,
+            Integer severityScore
     ) {
         this(
                 logId,
                 serviceName,
-                level,
-                message,
-                timestamp,
                 environment,
                 traceId,
+                timestamp,
+                anomalyType,
+                description,
+                fingerprint,
+                category,
+                severityScore,
                 UUID.randomUUID(),
-                "LogCreated",
+                "AnomalyDetected",
                 1,
                 Instant.now(),
-                "log-ingestion-service",
+                "anomaly-detection-service",
                 correlationIdFor(logId, traceId)
         );
     }

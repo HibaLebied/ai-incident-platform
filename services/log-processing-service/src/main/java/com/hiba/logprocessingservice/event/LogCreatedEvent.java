@@ -1,4 +1,4 @@
-package com.hiba.logingestionservice.event;
+package com.hiba.logprocessingservice.event;
 
 import java.time.LocalDateTime;
 import java.time.Instant;
